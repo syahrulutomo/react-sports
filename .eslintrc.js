@@ -51,7 +51,7 @@ module.exports = {
       {
         components: ['Label'],
         required: {
-          every: ['id'],
+          some: ['id'],
         },
       },
     ],
@@ -73,7 +73,7 @@ module.exports = {
         ],
       },
     ],
-    'react-hooks/rules-of-hooks': 'error',
+    // 'react-hooks/rules-of-hooks': 'error',
     'react/jsx-props-no-spreading': 'off',
   },
   globals: {

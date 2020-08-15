@@ -7,6 +7,7 @@ import { fetchLastEvents } from '../../../services/redux/actions/events';
 import { fetchLeagues } from '../../../services/redux/actions/leagues';
 import { fetchTeamsInLeague } from '../../../services/redux/actions/teams';
 import moment from 'moment';
+import { Link } from 'react-router-dom';
 
 function HomeView(props) {
   const { sports, leagues, teams, lastEvents, onFetchSports, onFetchLastEvents, onFetchLeagues, onFetchTeamsInLeague, loading } = props;
@@ -59,15 +60,17 @@ function HomeView(props) {
 
   const sportContents = sports.map((s) => {
     return (
-      <div 
-        key={s.idSport} 
-        className="sports-home" 
-        style={{ 
-          backgroundImage: `url(${s.strSportThumb})`,
-          width: '200px',
-          height: '120px'
-        }}
-      />
+      <Link to='/find' key={s.idSport} >
+        <div 
+          key={s.idSport} 
+          className="sports-home" 
+          style={{ 
+            backgroundImage: `url(${s.strSportThumb})`,
+            width: '200px',
+            height: '120px'
+          }}
+        />
+      </Link>
     )
   }); 
   

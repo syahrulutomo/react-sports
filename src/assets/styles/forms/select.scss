@@ -1,0 +1,17 @@
+.custom-select {
+  padding: $size-space-1 10px;
+  background: #FFFFFF;
+  border: 0.5px solid $theme-ui-colors-grey2;
+  border-radius: 4px;
+  display: block;
+  background-repeat: no-repeat;
+  background-position-x: 10px;
+  background-position: right;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  font-family: $font-family-normal;
+  color: $theme-ui-colors-darkgrey2;
+  font-size: 16px;
+  height: 40px;
+  align-self: center;
+}

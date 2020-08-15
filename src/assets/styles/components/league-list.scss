@@ -1,0 +1,64 @@
+.league-list {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: $size-space-8;
+  
+  &-item {
+    position: relative;
+    width: calc((100% - 48px) / 3);
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: $space;
+    margin-bottom: $space;
+    justify-content: center;
+    border: 1px solid $theme-ui-colors-grey2;
+    padding: $size-space-4 $size-space-2;
+    border-radius: 2px;
+
+    .flag {
+      position: absolute;
+      top: -5px;
+      right: -10px;
+      background-color: $theme-ui-colors-red;
+      color: $theme-ui-colors-white;
+      font-size: 13px;
+      padding: $size-space-1;
+      border-radius: 2px;
+      font-family: $font-family-normal;
+    }
+
+    &-badge {
+      width: 60px;
+
+      img {
+        width: 100%;
+      }
+    }
+
+    &-desc {
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: $size-space-2;
+
+      &-title {
+        font-family: $font-family-normal;
+        font-weight: $font-weight-regular;
+        font-size: $font-size-small;
+        color: $theme-ui-colors-darkgrey2;
+        text-align: center;
+        margin-bottom: $size-space-2;
+      }
+
+      &-country {
+        width: 100%;
+        font-family: $font-family-normal;
+        font-weight: $font-weight-regular;
+        font-size: $font-size-small;
+        color: $theme-ui-colors-darkgrey2;
+        text-align: center;
+      }
+    }
+  }
+}

@@ -26,9 +26,41 @@ export const fetchLeagues = () => {
     dispatch(getLeaguesStart());
     try {
       const result = await axios.get('/1/all_leagues.php');
-      dispatch(getLeaguesSuccess(result.data.leagues));
+      dispatch(getLeaguesSuccess(result.data.leagues.slice(0,30)));
     } catch (error) {
       dispatch(getLeaguesFail(error));
+    }
+  };
+};
+
+export const getDetailLeagueStart = () => {
+  return {
+    type: actionTypes.GET_DETAIL_LEAGUE_START,
+  };
+};
+
+export const getDetailLeagueSuccess = (detail) => {
+  return {
+    type: actionTypes.GET_DETAIL_LEAGUE_SUCCESS,
+    detail,
+  };
+};
+
+export const getDetailLeagueFail = (error) => {
+  return {
+    type: actionTypes.GET_DETAIL_LEAGUE_FAIL,
+    error,
+  };
+};
+
+export const fetchLeagueDetails = (id) => {
+  return async (dispatch) => {
+    dispatch(getDetailLeagueStart());
+    try {
+      const result = await axios.get('/1/lookupleague.php?id='+id);
+      dispatch(getDetailLeagueSuccess(result.data.leagues[0]));
+    } catch (error) {
+      dispatch(getDetailLeagueFail(error));
     }
   };
 };
