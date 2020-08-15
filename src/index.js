@@ -9,6 +9,7 @@ import thunk from 'redux-thunk';
 import sportsReducer from './services/redux/reducers/sports';
 import eventsReducer from './services/redux/reducers/events';
 import leaguesReducer from './services/redux/reducers/leagues';
+import teamsReducer from './services/redux/reducers/teams';
 
 import { Routes } from './routes';
 
@@ -23,6 +24,7 @@ const rootReducer = combineReducers({
   sports: sportsReducer,
   events: eventsReducer,
   leagues: leaguesReducer,
+  teams: teamsReducer,
 });
 
 const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)));

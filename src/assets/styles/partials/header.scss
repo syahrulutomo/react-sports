@@ -1,9 +1,20 @@
 .app-header {
   box-sizing: border-box;
-  display: flex;
-  align-items: center;
+  background-color: $theme-ui-colors-darkblue1;
   padding: $size-space-3 $space $space;
-  background-color: $theme-ui-colors-darkgrey1;
+
+  @media screen and (min-width: 800px) {
+    padding: 18px $space $space-and-half;
+  }
+  
+  &-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 1060px;
+  }
 
   .app-logo {
     font-family: "Raleway", sans-serif, Arial, Helvetica;
@@ -14,5 +25,9 @@
     color: $theme-ui-colors-white;
     text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     margin: 0;
+
+    @media screen and (min-width: 800px) {
+      font-size: 32px;
+    }
   }
 }

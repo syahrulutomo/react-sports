@@ -1,10 +1,25 @@
-import React from 'react';
-// import { Link, NavLink } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Sidebar } from './Sidebar';
+import { BurgerButton } from '../base';
 
 export const PartialHeader = () => {
+  const [active, setActive] = useState(false);
+  const handleClick = () => {
+    setActive(!active);
+  }
+
   return (
-    <header className="app-header">
-      <p className="app-logo">Jogo Sports</p>
-    </header>
+    <React.Fragment>
+      <header className="app-header">
+        <div className="app-header-container">
+          <p className="app-logo">Jogo Sports</p>
+          <BurgerButton active={active} handleClick={handleClick} />
+        </div>
+      </header>
+      {
+        active ?
+        <Sidebar/> : ''
+      }
+    </React.Fragment>
   );
 };

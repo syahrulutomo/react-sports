@@ -1,0 +1,22 @@
+.team-list-home {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+
+  &-item {
+    width: calc((100% - 60px)/ 5);
+    margin-bottom: $space;
+    img {
+      width: 100%;
+    }
+
+    @media screen and (min-width: 750px) {
+      width: calc((100% - 160px)/ 6);
+    }
+
+    @media screen and (min-width: 900px) {
+      width: calc((100% - 260px)/ 6);
+    }
+  }
+}
+

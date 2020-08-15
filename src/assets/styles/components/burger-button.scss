@@ -1,0 +1,67 @@
+.burger-button {
+  width: 20px;
+  height: 2px;
+  background-color: $theme-ui-colors-white;
+  position: absolute;
+  top: 50%;
+  right: 0;
+
+  &:after {
+    content: '';
+    width: 20px;
+    height: 2px;
+    background-color: $theme-ui-colors-white;
+    position: absolute;
+    top: -7px;
+    right: 0;
+    transform: rotate(0deg);
+    transition: transform .2s ease-out;
+  }
+
+  &:before {
+    content: '';
+    width: 20px;
+    height: 2px;
+    background-color: $theme-ui-colors-white;
+    position: absolute;
+    top: 7px;
+    right: 0;
+    transform: rotate(0deg);
+    transition: transform .2s ease-out;
+  }
+}
+
+.burger-button-active {
+  width: 20px;
+  height: 2px;
+  position: absolute;
+  top: 50%;
+  right: 0;
+  background-color: $theme-ui-colors-darkblue1;
+
+  &:after {
+    content: '';
+    width: 20px;
+    height: 2px;
+    border-radius: 4px;
+    background-color: $theme-ui-colors-white;
+    position: absolute;
+    top: 0px;
+    right: 0;
+    transform: rotate(45deg);
+    transition: transform .5s ease;
+  }
+
+  &:before {
+    content: '';
+    width: 20px;
+    height: 2px;
+    border-radius: 4px;
+    background-color: $theme-ui-colors-white;
+    position: absolute;
+    top: 0px;
+    right: 0;
+    transform: rotate(135deg);
+    transition: transform .5s ease;
+  }
+}

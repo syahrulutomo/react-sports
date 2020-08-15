@@ -10,15 +10,7 @@
   
   &--content {
     display: flex;
-    padding: $size-space-4 0;
-      
-    &-item {
-      margin-right: $space;
-      background-size: cover;
-      background-position: top;
-      border-radius: 4px;
-      box-shadow: 0px 2px 4px #BDBDBD;
-    }
+    padding-bottom: $size-space-2;
   }
 
   &--prev {
@@ -62,6 +54,13 @@
   }
 }
 
+.sports-home {
+  margin-right: $space;
+  background-size: cover;
+  background-position: top;
+  border-radius: 4px;
+  box-shadow: 0px 2px 4px #BDBDBD;
+}
 
 .match-highlights {
   width: 280px;
