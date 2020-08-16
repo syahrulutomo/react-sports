@@ -53,7 +53,7 @@ function HomeView(props) {
 
   useEffect(() => {
     if(leagues.length > 0) {
-      const index = Math.floor(Math.random() * (leagues.length - 0 + 1)) + 0;
+      const index = Math.floor(Math.random() * (leagues.length-1 - 0 + 1)) + 0;
       onFetchTeamsInLeague(leagues[index].strLeague);
     }
   }, [leagues, onFetchTeamsInLeague]);

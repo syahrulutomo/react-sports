@@ -2,9 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { LayoutDefault, Select, Checkbox, Input, Button } from '../../../components';
 import PropTypes from 'prop-types';
 import { fetchSports } from '../../../services/redux/actions/sports';
-import { fetchLeagues, fetchLeagueDetails } from '../../../services/redux/actions/leagues';
+import { fetchLeagues } from '../../../services/redux/actions/leagues';
 import { connect } from 'react-redux';
 import axios from '../../../services/libs/axios';
+import notFoundImage from '../../../assets/images/bee.png';
 
 function FindLeagueView(props) {
   const { sports, onFetchSports, leagues, onFetchLeagues } = props;
@@ -15,11 +16,11 @@ function FindLeagueView(props) {
   const [sortBySport, setSortBySport] = useState(false);
   const [searchText, setSearchText] = useState('');
   const [selectedLeagues, setSelectedLeagues] = useState([]);
+  const [disableSortByName, setDisableSortByName] = useState(false);
+  const [disableSortBySport, setDisableSortBySport] = useState(false);
+  const [nothingFound, setNothingFound] = useState(false);
 
-  const handleSelectSport = (e) => {
-    setSelectedSport(e.target.value);
-    setSelectedLeagues([]);
-    const data = leagues.filter((s) => s.strSport === e.target.value);
+  const getLeagueDetails = (data) => {
     if(data.length > 0) {
       data.forEach(async (item) => {
         try {
@@ -32,32 +33,96 @@ function FindLeagueView(props) {
     };
   }
 
-  const handleChangeSortByName = () => {
-    setSortByName(!sortByName);
+  const compareByName = ( a, b ) => {
+    if ( a.strLeague < b.strLeague ){
+      return -1;
+    }
+    if ( a.strLeague > b.strLeague ){
+      return 1;
+    }
+    return 0;
   }
 
-  const handleChangeSortBySport = () => {
+  const compareBySport = ( a, b ) => {
+    if ( a.strSport < b.strSport ){
+      return -1;
+    }
+    if ( a.strSport > b.strSport ){
+      return 1;
+    }
+    return 0;
+  }
+  
+  const handleSelectSport = (e) => {
+    setNothingFound(false);
+    if(e.target.value === '') {
+      setTimeout(() => getLeagueDetails(leagues), 1000);
+    } 
+    
+    setSelectedSport(e.target.value);
+    setSelectedLeagues([]);
+    let data;
+    if(selectedLeagues.length === 0) {
+      data = leagues.filter((s) => s.strSport.toLowerCase() === e.target.value.toLowerCase());
+    } else {
+      data = selectedLeagues.filter((s) => s.strSport.toLowerCase() === e.target.value.toLowerCase());
+    }
+    if(data.length === 0) setNothingFound(true);
+    getLeagueDetails(data);
+  }
+
+  const handleChangeSortByName = (e) => {
+    setSortByName(!sortByName);
+    if(sortByName) {
+      setDisableSortBySport(false);
+    } 
+    else if (!sortByName) {
+      setDisableSortBySport(true);
+      if(selectedLeagues.length === 0) {
+        getLeagueDetails(leagues);
+      }
+      const data = selectedLeagues.sort(compareByName);
+      setSelectedLeagues([]);
+      setSelectedLeagues(data);
+    } 
+  }
+
+  const handleChangeSortBySport = (e) => {
+    if(e.target.value === '') {
+      setTimeout(() => getLeagueDetails(leagues), 2000);
+    } 
     setSortBySport(!sortBySport);
+    if(sortBySport) {
+      setDisableSortByName(false);
+    } else if(!sortBySport) {
+      setDisableSortByName(true);
+      if(selectedLeagues.length === 0) {
+        getLeagueDetails(leagues);
+      }
+      const data = selectedLeagues.sort(compareBySport);
+      setSelectedLeagues([]);
+      setSelectedLeagues(data);
+    }
   }
   
   const handleChangeSearchText = (e) => {
     setSearchText(e.target.value);
+    if(e.target.value === '') {
+      setTimeout(() => getLeagueDetails(leagues), 5000);
+    } 
   }
 
   const handleClickSearch = () => {
     setSelectedLeagues([]);
     const regex = new RegExp(searchText, 'gi' );
-    const data = leagues.filter((s) => s.strLeague.match( regex));
-    if(data.length > 0) {
-      data.forEach(async (item) => {
-        try {
-          const result = await axios.get('/1/lookupleague.php?id='+item.idLeague);
-          setSelectedLeagues((selectedLeagues) => [...selectedLeagues, result.data.leagues[0]]);
-        } catch (error) {
-          console.log(error);
-        }
-      });
-    };
+    let data;
+    if(selectedLeagues.length === 0) {
+      data = leagues.filter((s) => s.strLeague.match( regex));
+    } else if(selectedLeagues.length > 0) {
+      data = selectedLeagues.filter((s) => s.strLeague.match( regex));
+    }
+    
+    getLeagueDetails(data);
   }
 
   useEffect(() => {
@@ -89,6 +154,7 @@ function FindLeagueView(props) {
     }
   }, [leagues]);
 
+
   return (
     <LayoutDefault>
       <div className="find-league-filter">
@@ -110,13 +176,14 @@ function FindLeagueView(props) {
             handleChange={handleChangeSortByName} 
             label="name" 
             style={{ marginRight: '12px' }} 
-            disabled
+            disabled={disableSortByName}
           />
           <Checkbox 
             id="checkbox-sort-by-sport" 
             value={sortBySport} 
             handleChange={handleChangeSortBySport} 
             label="sport" 
+            disabled={disableSortBySport}
           />
         </div>
       </div>
@@ -143,6 +210,14 @@ function FindLeagueView(props) {
             }) : ''
         }
       </section>
+      {
+        nothingFound ? 
+        (
+          <div className="not-found-image">
+            <img src={notFoundImage} alt="not found"/>
+          </div>
+        ): ''
+      }
     </LayoutDefault>
   );
 }
@@ -152,8 +227,7 @@ FindLeagueView.propTypes = {
   loading: PropTypes.bool,
   leagues: PropTypes.array,
   onFetchSports: PropTypes.func,
-  onFetchLeagues: PropTypes.func,
-  onFetchLeagueDetails: PropTypes.func
+  onFetchLeagues: PropTypes.func
 };
 
 const mapStateToProps = (state) => {
@@ -167,8 +241,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     onFetchSports: () => dispatch(fetchSports()),
-    onFetchLeagues: () => dispatch(fetchLeagues()),
-    onFetchLeagueDetails: (id) => dispatch(fetchLeagueDetails(id)),
+    onFetchLeagues: () => dispatch(fetchLeagues())
    };
 };
 
