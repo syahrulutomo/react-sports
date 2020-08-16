@@ -53,12 +53,7 @@ function FindLeagueView(props) {
     return 0;
   }
   
-  const handleSelectSport = (e) => {
-    setNothingFound(false);
-    if(e.target.value === '') {
-      setTimeout(() => getLeagueDetails(leagues), 1000);
-    }
-    
+  const handleSelectSport = (e) => {  
     setSelectedSport(e.target.value);
     setSelectedLeagues([]);
     let data;
@@ -67,7 +62,14 @@ function FindLeagueView(props) {
     } else {
       data = selectedLeagues.filter((s) => s.strSport.toLowerCase() === e.target.value.toLowerCase());
     }
-    if(data.length === 0) setNothingFound(true);
+    
+    if(data.length === 0) setNothingFound(true)
+    
+    if(e.target.value === '') {
+      setNothingFound(false);
+      getLeagueDetails(leagues);
+    }
+
     getLeagueDetails(data);
   }
 
@@ -108,7 +110,7 @@ function FindLeagueView(props) {
   const handleChangeSearchText = (e) => {
     setSearchText(e.target.value);
     if(e.target.value === '') {
-      setTimeout(() => getLeagueDetails(leagues), 5000);
+      setTimeout(() => getLeagueDetails(leagues), 3500);
     } 
   }
 
@@ -121,7 +123,6 @@ function FindLeagueView(props) {
     } else if(selectedLeagues.length > 0) {
       data = selectedLeagues.filter((s) => s.strLeague.match( regex));
     }
-    
     getLeagueDetails(data);
   }
 
