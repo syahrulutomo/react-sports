@@ -1,9 +1,15 @@
 module.exports = {
   presets: [
     [
-      '@babel/preset-env',
+      '@babel/env',
+      {
+        'targets': {
+          'browsers': ['Chrome >= 59'],
+          'node': 'current'
+        }
+      }
     ],
-    '@babel/preset-react',
+    '@babel/react',
   ],
   plugins: [
     '@babel/plugin-proposal-nullish-coalescing-operator',
