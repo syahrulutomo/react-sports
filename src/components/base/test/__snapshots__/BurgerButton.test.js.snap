@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<BurgerButton /> should render and match the snapshot 1`] = `
+<div
+  style={
+    Object {
+      "height": "40px",
+      "position": "relative",
+      "top": "50%",
+      "width": "40px",
+    }
+  }
+>
+  <div
+    className="burger-button"
+  />
+</div>
+`;

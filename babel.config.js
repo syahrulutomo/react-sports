@@ -2,9 +2,6 @@ module.exports = {
   presets: [
     [
       '@babel/preset-env',
-      {
-        modules: false,
-      },
     ],
     '@babel/preset-react',
   ],
@@ -12,6 +9,6 @@ module.exports = {
     '@babel/plugin-proposal-nullish-coalescing-operator',
     '@babel/plugin-proposal-optional-chaining',
     '@babel/plugin-proposal-class-properties',
-    '@babel/proposal-object-rest-spread',
+    '@babel/proposal-object-rest-spread'
   ],
 };

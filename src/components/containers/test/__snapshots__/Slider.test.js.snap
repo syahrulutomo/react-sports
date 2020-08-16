@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly Slider component 1`] = `
+<section
+  className="app-slider"
+>
+  
+  <div
+    className="app-slider--content"
+    style={
+      Object {
+        "transform": "translateX(NaNpx)",
+        "transition": "transform 1s ease",
+        "width": "calc((undefinedpx *  4) + undefinedpx * 3)",
+      }
+    }
+  >
+    Object {
+      "a": 1,
+    }
+    Object {
+      "b": 1,
+    }
+    Object {
+      "c": 1,
+    }
+    Object {
+      "d": 1,
+    }
+  </div>
+  <div
+    className="app-slider--next"
+    onClick={[Function]}
+  >
+    <img
+      alt="next"
+      src="keyboard_arrow_right-black-18dp.svg"
+    />
+  </div>
+</section>
+`;
