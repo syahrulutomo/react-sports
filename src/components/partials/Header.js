@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Sidebar } from './Sidebar';
 import { BurgerButton } from '../base';
+import { Link } from 'react-router-dom';
 
 export const PartialHeader = () => {
   const [active, setActive] = useState(false);
@@ -12,7 +13,9 @@ export const PartialHeader = () => {
     <React.Fragment>
       <header className="app-header">
         <div className="app-header-container">
-          <p className="app-logo">Jogo Sports</p>
+          <Link to='/'>
+            <p className="app-logo">Jogo Sports</p>
+          </Link>          
           <BurgerButton active={active} handleClick={handleClick} />
         </div>
       </header>

@@ -57,7 +57,7 @@ function FindLeagueView(props) {
     setNothingFound(false);
     if(e.target.value === '') {
       setTimeout(() => getLeagueDetails(leagues), 1000);
-    } 
+    }
     
     setSelectedSport(e.target.value);
     setSelectedLeagues([]);

@@ -7,7 +7,6 @@ import { fetchLastEvents } from '../../../services/redux/actions/events';
 import { fetchLeagues } from '../../../services/redux/actions/leagues';
 import { fetchTeamsInLeague } from '../../../services/redux/actions/teams';
 import moment from 'moment';
-import { Link } from 'react-router-dom';
 
 function HomeView(props) {
   const { sports, leagues, teams, lastEvents, onFetchSports, onFetchLastEvents, onFetchLeagues, onFetchTeamsInLeague, loading } = props;
@@ -25,13 +24,9 @@ function HomeView(props) {
 
   useEffect(() => {
     if(leagues.length > 0) {
-      const index = Math.floor(Math.random() * (10 - 0 + 1)) + 0;
-      const sliced = leagues.slice(index, index+5);
+      const sliced = leagues.slice(0, 5);
       setChoosenLeagues(sliced);
     }
-    return () => {
-      setChoosenLeagues([]);
-    };
   }, [leagues]);
 
   useEffect(() => {
@@ -44,7 +39,7 @@ function HomeView(props) {
 
 
   useEffect(() => {
-    if(lastEvents.length > 0) {
+    if(lastEvents.length > 0 && choosenLastEvent.length < 5) {
       let temp = choosenLastEvent;
       temp.push(lastEvents);
       setChoosenLastEvent(temp);
@@ -60,7 +55,6 @@ function HomeView(props) {
 
   const sportContents = sports.map((s) => {
     return (
-      <Link to='/find' key={s.idSport} >
         <div 
           key={s.idSport} 
           className="sports-home" 
@@ -70,7 +64,6 @@ function HomeView(props) {
             height: '120px'
           }}
         />
-      </Link>
     )
   }); 
   
