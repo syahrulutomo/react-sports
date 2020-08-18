@@ -58,11 +58,7 @@ function FindLeagueView(props) {
     setSelectedSport(e.target.value);
     setSelectedLeagues([]);
     let data;
-    if(selectedLeagues.length === 0) {
-      data = leagues.filter((s) => s.strSport.toLowerCase() === e.target.value.toLowerCase());
-    } else {
-      data = selectedLeagues.filter((s) => s.strSport.toLowerCase() === e.target.value.toLowerCase());
-    }
+    data = leagues.filter((s) => s.strSport.toLowerCase() === e.target.value.toLowerCase());
     
     if(data.length === 0) setNothingFound(true)
     
