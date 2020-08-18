@@ -53,7 +53,8 @@ function FindLeagueView(props) {
     return 0;
   }
   
-  const handleSelectSport = (e) => {  
+  const handleSelectSport = (e) => { 
+    setNothingFound(false); 
     setSelectedSport(e.target.value);
     setSelectedLeagues([]);
     let data;
