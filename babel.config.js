@@ -4,7 +4,7 @@ module.exports = {
       '@babel/env',
       {
         'targets': {
-          'browsers': ['Chrome >= 59'],
+          'browsers': ['chrome >= 59'],
           'node': 'current'
         }
       }
