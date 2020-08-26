@@ -1,9 +1,9 @@
-"use strict";
+
 
 module.exports = {
   presets: [['@babel/env', {
     'targets': {
-      'browsers': ['chrome >= 59'],
+      'browsers': ['chrome >= 51'],
       'node': 'current'
     }
   }], '@babel/react'],
